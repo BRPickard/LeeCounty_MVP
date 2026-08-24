@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcel Damage Assessment</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <header id="brand">
+      <h1>Parcel Damage Assessment</h1>
+      <p id="dataset-line" class="muted">loading parcel data…</p>
+    </header>
+
+    <section class="step" id="step-area">
+      <h2><span class="num">1</span> Choose an area</h2>
+      <div class="btn-row">
+        <button id="btn-draw" class="btn">Draw a box</button>
+        <button id="btn-pick" class="btn">Click parcels</button>
+        <button id="btn-clear" class="btn ghost">Clear</button>
+      </div>
+      <label class="field">
+        <span>Find a parcel</span>
+        <input id="search-input" type="search" placeholder="address, owner or PIN" autocomplete="off">
+      </label>
+      <ul id="search-results" class="results-list" hidden></ul>
+      <p id="area-summary" class="muted">No area selected yet.</p>
+    </section>
+
+    <section class="step" id="step-imagery">
+      <h2><span class="num">2</span> Pick before and after imagery</h2>
+      <label class="field">
+        <span>Imagery source</span>
+        <select id="provider-select"></select>
+      </label>
+      <p id="provider-note" class="muted small"></p>
+      <div class="date-grid">
+        <label class="field"><span>Before: from</span><input type="date" id="pre-start"></label>
+        <label class="field"><span>to</span><input type="date" id="pre-end"></label>
+        <label class="field"><span>After: from</span><input type="date" id="post-start"></label>
+        <label class="field"><span>to</span><input type="date" id="post-end"></label>
+      </div>
+      <label class="field">
+        <span>Max cloud cover: <output id="cloud-value">60</output>%</span>
+        <input type="range" id="cloud-range" min="0" max="100" value="60" step="5">
+      </label>
+      <button id="btn-search" class="btn primary wide" disabled>Find imagery</button>
+      <div id="scene-picker" hidden>
+        <label class="field">
+          <span>Before scene</span>
+          <select id="pre-scene"></select>
+        </label>
+        <label class="field">
+          <span>After scene</span>
+          <select id="post-scene"></select>
+        </label>
+      </div>
+      <p id="imagery-note" class="muted small"></p>
+    </section>
+
+    <section class="step" id="step-run">
+      <h2><span class="num">3</span> Run the assessment</h2>
+      <details>
+        <summary>Advanced options</summary>
+        <label class="field">
+          <span>Building footprints</span>
+          <select id="building-source"></select>
+        </label>
+        <label class="field">
+          <span>Analysis resolution (m/pixel, blank = native)</span>
+          <input type="number" id="gsd" min="0.1" max="60" step="0.1" placeholder="native">
+        </label>
+      </details>
+      <button id="btn-run" class="btn primary wide" disabled>Assess damage</button>
+      <div id="progress" hidden>
+        <div class="bar"><div id="progress-fill"></div></div>
+        <p id="progress-text" class="muted small"></p>
+      </div>
+      <p id="run-error" class="error" hidden></p>
+    </section>
+
+    <section class="step" id="step-results" hidden>
+      <h2><span class="num">4</span> Results</h2>
+      <div id="summary-cards" class="cards"></div>
+      <div id="class-bar"></div>
+      <ul id="class-legend" class="legend"></ul>
+      <div id="warnings"></div>
+      <div class="btn-row">
+        <a id="dl-parcels-csv" class="btn small" download>Parcels CSV</a>
+        <a id="dl-buildings-csv" class="btn small" download>Structures CSV</a>
+        <a id="dl-geojson" class="btn small" download>GeoJSON</a>
+      </div>
+      <h3>Worst affected parcels</h3>
+      <table id="results-table"><tbody></tbody></table>
+    </section>
+  </aside>
+
+  <main id="map-wrap">
+    <div id="map"></div>
+    <div id="map-hint" class="map-hint" hidden></div>
+    <div id="detail" class="detail" hidden>
+      <button id="detail-close" class="detail-close" aria-label="Close">×</button>
+      <div id="detail-body"></div>
+    </div>
+  </main>
+</div>
+<script src="vendor/leaflet.js"></script>
+<script src="static/app.js"></script>
+</body>
+</html>
