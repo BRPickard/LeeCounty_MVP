@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import datetime as dt
-import json
 import logging
 from pathlib import Path
 from typing import Any
@@ -195,7 +194,7 @@ def job_list(limit: int = Query(20, le=100)) -> list[dict[str, Any]]:
 
 @app.get("/api/assess/{job_id}/parcels.geojson")
 def job_parcels(job_id: str, geometry: bool = True):
-    job = _finished(job_id)
+    _finished(job_id)
     result = registry.result(job_id)
     if result is not None:
         return JSONResponse(result.feature_collection(geometry=geometry))
@@ -280,8 +279,9 @@ def job_chip(job_id: str, parcel_id: int, size: int = Query(320, ge=64, le=1024)
             scale = size / max(window.height, window.width)
             out_h = max(1, int(round(window.height * scale)))
             out_w = max(1, int(round(window.width * scale)))
-            arr = src.read(window=window, out_shape=(src.count, out_h, out_w))
-        if src.count >= 3:
+            band_count = src.count
+            arr = src.read(window=window, out_shape=(band_count, out_h, out_w))
+        if band_count >= 3:
             panels.append(np.transpose(arr[:3], (1, 2, 0)))
         else:
             from .render import damage_ramp

@@ -25,9 +25,9 @@ from scipy import ndimage
 from shapely.geometry.base import BaseGeometry
 
 from .buildings.base import Building, BuildingSet
-from .change import (DAMAGE_CLASSES, DAMAGED_CLASSES, DESTROYED, MODERATE,
-                     NONE, ChangeResult, DetectorConfig)
-from .geo import WGS84, reproject, reproject_many
+from .change import (DAMAGE_CLASSES, DAMAGED_CLASSES, NONE, ChangeResult,
+                     DetectorConfig)
+from .geo import WGS84, reproject_many
 from .parcels import Parcel
 from .zonal import ZonalIndex, rasterize_labels
 

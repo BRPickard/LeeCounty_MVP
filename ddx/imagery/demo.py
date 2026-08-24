@@ -13,7 +13,7 @@ from typing import Any, Sequence
 import numpy as np
 
 from ..geo import BBox, Grid, grid_bbox_wgs84
-from .base import ALL_BANDS, BandStack, ImageryProvider, Scene
+from .base import ALL_BANDS, BandStack, Scene
 from .synth import (DEFAULT_EVENT, SceneRenderRequest, SynthEvent, _unit_hash,
                     render_scene)
 

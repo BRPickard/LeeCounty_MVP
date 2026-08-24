@@ -24,7 +24,6 @@ def test_counts_and_means(labels):
 
 
 def test_valid_mask_excludes_pixels(labels):
-    values = np.ones((6, 6), dtype="float32")
     valid = np.ones((6, 6), dtype=bool)
     valid[0, 0] = False
     index = ZonalIndex(labels, valid)

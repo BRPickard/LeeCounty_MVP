@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import itertools
 import sys
 from collections import Counter
 from pathlib import Path

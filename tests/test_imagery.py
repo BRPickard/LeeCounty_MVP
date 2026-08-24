@@ -5,8 +5,8 @@ import pytest
 
 from ddx.geo import make_grid
 from ddx.imagery import (DemoProvider, LocalProvider, ProviderError,
-                         get_provider, list_providers, read_scene,
-                         resolve_scene, search_scenes)
+                         get_provider, list_providers, resolve_scene,
+                         search_scenes)
 from ddx.imagery.base import ALL_BANDS, BandStack, Scene
 from ddx.imagery.local import load_manifest, save_manifest
 from ddx.imagery.stac import StacProvider, list_presets

@@ -136,7 +136,7 @@ for prioritising field inspection, not an appraisal.
 `scripts/calibrate.py` scores the detector against the demo provider's ground
 truth, which is known exactly because the simulation created it. On the
 shipped demo the detector reaches roughly **0.82 F1** for major-or-destroyed
-structures (recall ≈ 0.91, precision ≈ 0.74) using tax-roll approximate
+structures (recall ≈ 0.89, precision ≈ 0.76) using tax-roll approximate
 footprints.
 
 **That number measures the plumbing, not the physics.** It says the score

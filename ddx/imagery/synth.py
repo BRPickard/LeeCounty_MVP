@@ -23,7 +23,7 @@ import rasterio
 from rasterio.features import rasterize
 from scipy import ndimage
 
-from shapely.geometry import GeometryCollection, Point
+from shapely.geometry import Point
 
 from ..geo import WGS84, Grid, reproject, reproject_many
 from .base import ALL_BANDS
